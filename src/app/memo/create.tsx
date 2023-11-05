@@ -3,13 +3,24 @@ import {
 } from 'react-native'
 
 import { router } from 'expo-router'
+import { collection, addDoc } from 'firebase/firestore'
 
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/icon'
+import { db, auth } from '../../config'
 
 const handlePress = (): void => {
-  // ログイン
-  router.push('/memo/list')
+  const ref = collection(db, `users/${auth.currentUser.uid}/memos`)
+  addDoc(ref, {
+    bodyText: 'test'
+  })
+    .then((docRef) => {
+      console.log('success', docRef.id)
+      router.back()
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const Create = (): JSX.Element => {
