@@ -18,11 +18,23 @@ const handlePress = (email: string, password: string): void => {
       router.replace('/memo/list')
     })
     .catch((error) => {
+      const { code, message } = error
+      console.log(code, message)
+      Alert.alert(message)
+    })
+  /*
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential.user.uid)
+      router.replace('/memo/list')
+    })
+    .catch((error) => {
       console.log(error)
       const { code, message } = error
       console.log(code, message)
       Alert.alert(message)
     })
+    */
 }
 
 const SignUp = (): JSX.Element => {

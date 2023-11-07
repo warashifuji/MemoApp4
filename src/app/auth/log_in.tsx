@@ -48,7 +48,7 @@ const LogIn = (): JSX.Element => {
           placeholder='Oassword'
           textContentType='password'
         />
-        <Button label='Submit' onPress={() => {handlePress(email, password)}} />
+        <Button label='Submit' onPress={() => { handlePress(email, password) }} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registerd?</Text>
           <Link href='/auth/sign_up' asChild replace>
