@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, FlatList } from 'react-native'
 import { useEffect, useState } from 'react'
 import { router, useNavigation } from 'expo-router'
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
@@ -25,7 +25,7 @@ const List = (): JSX.Element => {
   useEffect(() => {
     if (auth.currentUser === null) { return }
     const ref = collection(db, `users/${auth.currentUser.uid}/memos`)
-    const q = query(ref, orderBy('updateAt', 'desc'))
+    const q = query(ref, orderBy('updatedAt', 'desc'))
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const remoteMemos: Memo[] = []
       snapshot.forEach((doc) => {
@@ -43,10 +43,10 @@ const List = (): JSX.Element => {
   }, [])
   return (
     <View style={styles.container}>
-      <View>
-        {memos.map((memo) => <MemoListItem memo={memo} />)}
-      </View>
-
+      <FlatList
+        data={memos}
+        renderItem={({ item }) => <MemoListItem memo={item}/>}
+      />
       <CircleButton onPress={handlePress}>
         <Icon name='plus' size={40} color='#ffffff' />
       </CircleButton>

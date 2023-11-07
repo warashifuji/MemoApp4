@@ -13,7 +13,7 @@ const handlePress = (email: string, password: string): void => {
   // ログイン
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log(userCredential.user.uid)
+      console.log('SUCCESS!!', userCredential.user.uid)
       router.replace('/memo/list')
     })
     .catch((error) => {
