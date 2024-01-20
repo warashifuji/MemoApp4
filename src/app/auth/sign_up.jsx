@@ -1,23 +1,28 @@
 import {
-  View, Text, TextInput, StyleSheet, TouchableOpacity, Alert
-} from 'react-native'
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Alert
+} from "react-native"
 
-import { Link, router } from 'expo-router'
-import { useState } from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { Link, router } from "expo-router"
+import { useState } from "react"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
-import { auth } from '../../config'
-import Button from '../../components/Button'
+import { auth } from "../../config"
+import Button from "../../components/Button"
 
-const handlePress = (email: string, password: string): void => {
+const handlePress = (email, password) => {
   // 会員登録
   console.log(email, password)
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(userCredential => {
       console.log(userCredential.user.uid)
-      router.replace('/memo/list')
+      router.replace("/memo/list")
     })
-    .catch((error) => {
+    .catch(error => {
       const { code, message } = error
       console.log(code, message)
       Alert.alert(message)
@@ -37,9 +42,9 @@ const handlePress = (email: string, password: string): void => {
     */
 }
 
-const SignUp = (): JSX.Element => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const SignUp = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -47,30 +52,38 @@ const SignUp = (): JSX.Element => {
         <TextInput
           style={styles.input}
           value={email}
-          onChangeText={(text) => { setEmail(text) }}
-          autoCapitalize='none'
-          keyboardType='email-address'
-          placeholder='Email Address'
-          textContentType='emailAddress'
+          onChangeText={text => {
+            setEmail(text)
+          }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Address"
+          textContentType="emailAddress"
         />
         <TextInput
           style={styles.input}
           value={password}
-          onChangeText={(text) => { setPassword(text) }}
-          autoCapitalize='none'
+          onChangeText={text => {
+            setPassword(text)
+          }}
+          autoCapitalize="none"
           secureTextEntry
-          placeholder='Password'
-          textContentType='password'
+          placeholder="Password"
+          textContentType="password"
         />
-        <Button label='Submit' onPress={() => { handlePress(email, password) }} />
+        <Button
+          label="Submit"
+          onPress={() => {
+            handlePress(email, password)
+          }}
+        />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
-          <Link href='/auth/log_in' asChild replace>
+          <Link href="/auth/log_in" asChild replace>
             <TouchableOpacity>
               <Text style={styles.footerLink}>Log in!</Text>
             </TouchableOpacity>
           </Link>
-
         </View>
       </View>
     </View>
@@ -80,12 +93,12 @@ const SignUp = (): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F4F8'
+    backgroundColor: "#F0F4F8"
   },
   title: {
     fontSize: 24,
     lineHeight: 32,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 24
   },
   inner: {
@@ -93,28 +106,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 27
   },
   input: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderWidth: 1,
-    borderColor: '#DDDDDD',
+    borderColor: "#DDDDDD",
     height: 48,
     padding: 8,
     fontSize: 16,
     marginBottom: 16
   },
   footer: {
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   footerText: {
     fontSize: 14,
     lineHeight: 24,
     marginRight: 8,
-    color: 'black'
+    color: "black"
   },
   footerLink: {
     fontSize: 14,
     lineHeight: 24,
     marginRight: 8,
-    color: '#467FD3'
+    color: "#467FD3"
   }
 })
 
