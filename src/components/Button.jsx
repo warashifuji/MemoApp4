@@ -1,11 +1,6 @@
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, TouchableOpacity } from "react-native"
 
-interface Props {
-  label: string
-  onPress?: () => void
-}
-
-const Button = (props: Props): JSX.Element => {
+const Button = props => {
   const { label, onPress } = props
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
@@ -16,13 +11,13 @@ const Button = (props: Props): JSX.Element => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#467FD3',
+    backgroundColor: "#467FD3",
     borderRadius: 4,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginBottom: 24
   },
   buttonLabel: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
     lineHeight: 32,
     paddingVertical: 8,
